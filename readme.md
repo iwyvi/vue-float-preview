@@ -25,7 +25,7 @@ import VueFloatPreview from 'vue-float-preview'
 Vue.use(VueFloatPreview)
 ```
 
-For more information, please refer to [Examples]().
+For more information, please refer to [Examples](https://www.iwyvi.com/vue-float-preview/).
 
 ## Development
 
