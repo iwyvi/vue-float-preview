@@ -25,7 +25,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class App extends Vue {
-  imageSrc = '/assets/logo.png';
+  imageSrc = 'assets/logo.png';
 }
 </script>
 
