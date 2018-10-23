@@ -10,7 +10,8 @@
     "no-consecutive-blank-lines": false,
     "adjacent-overload-signatures": true,
     "new-parens": true,
-    "no-unused-expression": true,
+    "no-unused-expression": false,
+    "no-unused-variable": false,
     "curly": [true, "ignore-same-line"],
     "quotemark": [true, "single"],
     "ordered-imports": false,
@@ -22,6 +23,7 @@
     "member-access": false,
     "member-ordering": false,
     "no-trailing-whitespace": true,
+    "no-empty-interface": false,
     "max-classes-per-file": false,
     "no-shadowed-variable": false,
     "object-literal-shorthand": false,
@@ -30,12 +32,7 @@
     "array-type": false,
     "unified-signatures": false,
     "object-literal-key-quotes": false,
-    "no-unused-variable": [
-      true,
-      {
-        "ignore-pattern": "^_.+"
-      }
-    ],
+    "interface-name": false,
     "variable-name": [
       true,
       "ban-keywords",
