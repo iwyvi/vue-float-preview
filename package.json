@@ -29,7 +29,7 @@
     "clean": "npm run clean:lib && npm run clean:examples",
     "clean:lib": "rimraf lib",
     "clean:examples": "rimraf examples/dist",
-    "dev:examples": "webpack-dev-server --hot --progress --context examples --config examples/webpack.config.js --mode development"
+    "dev:examples": "webpack-dev-server --hot --context examples --content-base examples --config examples/webpack.config.js --mode development"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
