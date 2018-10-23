@@ -6,8 +6,6 @@
   },
   "rules": {
     "max-line-length": false,
-    "no-arg": false,
-    "no-bitwise": false,
     "no-conditional-assignment": false,
     "no-consecutive-blank-lines": false,
     "adjacent-overload-signatures": true,
@@ -15,13 +13,10 @@
     "no-unused-expression": true,
     "curly": [true, "ignore-same-line"],
     "quotemark": [true, "single"],
-    "align": false,
     "ordered-imports": false,
     "ban-types": false,
     "no-var-requires": false,
     "no-angle-bracket-type-assertion": false,
-    "semicolon": false,
-    "whitespace": false,
     "trailing-comma": false,
     "object-literal-sort-keys": false,
     "member-access": false,
@@ -29,37 +24,12 @@
     "no-trailing-whitespace": true,
     "max-classes-per-file": false,
     "no-shadowed-variable": false,
-    "eofline": false,
-    "no-namespace": false,
-    "no-empty": false,
     "object-literal-shorthand": false,
     "no-string-literal": false,
     "one-variable-per-declaration": false,
     "array-type": false,
-    "no-empty-interface": false,
     "unified-signatures": false,
     "object-literal-key-quotes": false,
-    "space-before-function-paren": [
-      true,
-      {
-        "anonymous": "never",
-        "named": "never",
-        "asyncArrow": "always",
-        "method": "never",
-        "constructor": "never"
-      }
-    ],
-    "triple-equals": false,
-    "prefer-for-of": {
-      "severity": "warning"
-    },
-    "prefer-const": {
-      "severity": "warning"
-    },
-    "no-console": {
-      "severity": "warning",
-      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
-    },
     "no-unused-variable": [
       true,
       {
@@ -80,21 +50,6 @@
       "severity": "warning"
     },
     "radix": true,
-    "prefer-template": {
-      "severity": "warning"
-    },
-    "cyclomatic-complexity": {
-      "severity": "warning",
-      "options": 20
-    },
-    "no-debugger": false
-  },
-  "jsRules": {
-    "max-line-length": false,
-    "semicolon": false,
-    "whitespace": false,
-    "object-literal-sort-keys": false,
-    "quotemark": false,
-    "trailing-comma": false
+    "no-debugger": true
   }
 }
