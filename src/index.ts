@@ -4,5 +4,5 @@ import VueFloatPreview from './vue-float-preview.vue';
 import { InstallationOptions } from '../types/index';
 
 export function install(vue: typeof Vue, options: InstallationOptions) {
-  vue.component(`vue-float-preview`, VueFloatPreview);
+  vue.component(`float-preview`, VueFloatPreview);
 }
