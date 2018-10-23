@@ -1,7 +1,7 @@
 {
   "name": "vue-float-preview",
   "version": "1.0.1",
-  "description": "",
+  "description": "A Floating Previewer for Vue.js.",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
   "license": "MIT",
