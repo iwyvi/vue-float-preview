@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <vue-float-preview
+    <float-preview
       class="vpp"
       :src="imageSrc"
       :content-style="`border-radius: 20px;box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);`"
       :scale="true"
       :track="true"
-    ></vue-float-preview>
-    <vue-float-preview
+    ></float-preview>
+    <float-preview
       class="vpp"
       :content-style="`border-radius: 20px;box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);`"
       :scale="false"
@@ -19,7 +19,7 @@
       <template slot="preview">
         <h2>test</h2>
       </template>
-    </vue-float-preview>
+    </float-preview>
   </div>
 </template>
 
