@@ -1,50 +1,81 @@
 <template>
-  <div id="app">
-    <float-preview
-      class="vpp"
-      :src="imageSrc"
-      :content-style="`border-radius: 20px;box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);`"
-    ></float-preview>
-    <float-preview
-      class="vpp"
-      :content-style="`border-radius: 20px;box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);`"
-      :scale="false"
-      :width="400"
-      :height="300"
-    >
-      <h1>vue-float-preview</h1>
-      <template slot="preview">
-        <h2>Hello World!</h2>
-      </template>
-    </float-preview>
+  <div>
+    <div class="container">
+      <header>
+        <h1>vue-float-preview</h1>
+        <a href="https://github.com/IwYvI/vue-float-preview">View in GitHub</a>
+      </header>
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Weibo demo</h2>
+        </div>
+        <div class="section-container">
+          <weibo-demo></weibo-demo>
+        </div>
+      </section>
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Slot demo</h2>
+        </div>
+        <div class="section-container">
+          <slot-demo></slot-demo>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
-export default class App extends Vue {
-  imageSrc = 'assets/logo.png';
-}
+import WeiboDemo from './components/weibo-demo.vue';
+import SlotDemo from './components/slot-demo.vue';
+
+@Component({
+  components: { WeiboDemo, SlotDemo }
+})
+export default class App extends Vue {}
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
-#app {
+.container {
+  width: 1200px;
+  margin: auto;
+}
+header {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
 }
-.vpp {
-  width: 300px;
-  height: 300px;
+h1 {
+  font-size: 48px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+header a {
+  color: #5678c2;
+}
+section {
+  margin-bottom: 40px;
+}
+.section-header {
+  display: flex;
+}
+.section-title {
+  padding: 0 20px 5px;
+  border-bottom: 4px solid #342423;
+}
+.section-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
