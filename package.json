@@ -1,6 +1,6 @@
 {
   "name": "vue-float-preview",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Floating Previewer for Vue.js.",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
@@ -23,6 +23,7 @@
     "bootstrap": "yarn || npm i",
     "dist": "npm run build:lib",
     "deploy": "npm run build:examples && gh-pages -d examples/dist && npm run clean:examples",
+    "pub": "npm run dist && npm run build:examples",
     "lint:lib": "wotan src/**/*",
     "lint:examples": "wotan examples/src/**/*",
     "build:lib": "npm run clean:lib && npm run lint:lib && webpack --mode production",
