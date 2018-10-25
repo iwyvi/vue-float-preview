@@ -31,5 +31,25 @@ module.exports = {
         ignore: ['.*']
       }
     ])
-  ]
+  ],
+  devServer: {
+    stats: {
+      assets: false,
+      builtAt: false,
+      cached: false,
+      cachedAssets: false,
+      children: false,
+      chunks: false,
+      chunkGroups: false,
+      chunkModules: false,
+      chunkOrigins: false,
+      hash: false,
+      errors: true,
+      errorDetails: true,
+      modules: false,
+      moduleTrace: true,
+      timings: true,
+      warnings: true
+    }
+  }
 };
