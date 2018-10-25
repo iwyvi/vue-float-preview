@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: ['./src/main.ts', 'file-loader?name=index.html!./src/index.html'],
+  entry: ['./src/main.ts', 'file-loader?name=index.html!./index.html'],
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js'
