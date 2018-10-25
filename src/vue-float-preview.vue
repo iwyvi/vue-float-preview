@@ -1,40 +1,42 @@
 <template>
-  <div class="vfp-wrap">
-    <div
-      class="vfp-content-wrap"
-      :style="contentStyle"
-      @mousemove.capture="onMouseMove"
-      @mouseout.capture="onMouseOut"
-      @mouseover.capture="onMouseOver"
-      ref="content-wrap"
-    >
+  <div>
+    <div class="vfp-wrap">
       <div
-        class="vfp-content-scale"
-        :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
+        class="vfp-content-wrap"
+        :style="contentStyle"
+        @mousemove.capture="onMouseMove"
+        @mouseout.capture="onMouseOut"
+        @mouseover.capture="onMouseOver"
+        ref="content-wrap"
       >
-        <slot>
-          <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
-            <icon v-if="isImageLoading" class="vfp-content-image-loader" name="loader"></icon>
-            <img class="vfp-content-image-placeholder" :src="src">
-          </div>
+        <div
+          class="vfp-content-scale"
+          :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
+        >
+          <slot>
+            <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
+              <icon v-if="isImageLoading" class="vfp-content-image-loader" name="loader"></icon>
+              <img class="vfp-content-image-placeholder" :src="src">
+            </div>
+          </slot>
+        </div>
+      </div>
+      <div
+        v-if="!disabled && isRender"
+        :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
+        class="vfp-preview-wrap"
+        ref="preview-wrap"
+        :style="previewStyle"
+      >
+        <slot name="preview">
+          <icon v-if="isImageLoading" name="loader"></icon>
+          <span v-else-if="isImageError">
+            <icon name="error"></icon>
+          </span>
+          <img v-else-if="src" :src="src" class="vfp-preview-image">
+          <icon v-else name="error"></icon>
         </slot>
       </div>
-    </div>
-    <div
-      v-if="!disabled && isRender"
-      :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
-      class="vfp-preview-wrap"
-      ref="preview-wrap"
-      :style="previewStyle"
-    >
-      <slot name="preview">
-        <icon v-if="isImageLoading" name="loader"></icon>
-        <span v-else-if="isImageError">
-          <icon name="error"></icon>
-        </span>
-        <img v-else-if="src" :src="src" class="vfp-preview-image">
-        <icon v-else name="error"></icon>
-      </slot>
     </div>
   </div>
 </template>
@@ -108,13 +110,13 @@ export default class VueFloatPreview extends Vue {
     type: Number,
     validator: isPositive(false)
   })
-  maxPreviewWidth!: number;
+  maxWidth!: number;
 
   @Prop({
     type: Number,
     validator: isPositive(false)
   })
-  maxPreviewHeight!: number;
+  maxHeight!: number;
 
   @Prop({
     type: Number,
@@ -197,11 +199,11 @@ export default class VueFloatPreview extends Vue {
       return;
     }
     const [windowWidth, windowHeight] = this.getWindowSize();
-    const maxPreviewWidth = this.maxPreviewWidth
-      ? Math.min((windowWidth * 3) / 5, this.maxPreviewWidth)
+    const maxPreviewWidth = this.maxWidth
+      ? Math.min((windowWidth * 3) / 5, this.maxWidth)
       : (windowWidth * 3) / 5;
-    const maxPreviewHeight = this.maxPreviewHeight
-      ? Math.min(windowHeight, this.maxPreviewHeight)
+    const maxPreviewHeight = this.maxHeight
+      ? Math.min(windowHeight, this.maxHeight)
       : windowHeight;
     let [previewWidth, previewHeight] = [0, 0];
     const ratio = width / height;
@@ -325,6 +327,8 @@ export default class VueFloatPreview extends Vue {
 .vfp-wrap {
   position: relative;
   display: flex;
+  width: 100%;
+  height: 100%;
 }
 .vfp-content-wrap {
   display: flex;
@@ -361,6 +365,7 @@ export default class VueFloatPreview extends Vue {
   min-width: 100%;
   min-height: 100%;
   opacity: 0;
+  position: absolute;
 }
 .vfp-preview-wrap {
   position: absolute;
