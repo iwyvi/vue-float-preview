@@ -49,14 +49,6 @@ function isPositive(equal: boolean = true): (v: number) => boolean {
   return (v) => (v > 0 ? true : false);
 }
 
-function getBiggerNumber(num1: number, num2: number): number {
-  return num1 > num2 ? num1 : num2;
-}
-
-function getSmallerNumber(num1: number, num2: number): number {
-  return num1 > num2 ? num2 : num1;
-}
-
 @Component({
   components: {
     Icon
@@ -206,10 +198,10 @@ export default class VueFloatPreview extends Vue {
     }
     const [windowWidth, windowHeight] = this.getWindowSize();
     const maxPreviewWidth = this.maxPreviewWidth
-      ? getSmallerNumber((windowWidth * 3) / 5, this.maxPreviewWidth)
+      ? Math.min((windowWidth * 3) / 5, this.maxPreviewWidth)
       : (windowWidth * 3) / 5;
     const maxPreviewHeight = this.maxPreviewHeight
-      ? getSmallerNumber(windowHeight, this.maxPreviewHeight)
+      ? Math.min(windowHeight, this.maxPreviewHeight)
       : windowHeight;
     let [previewWidth, previewHeight] = [0, 0];
     const ratio = width / height;
