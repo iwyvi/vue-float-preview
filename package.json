@@ -30,6 +30,7 @@
     "clean": "npm run clean:lib && npm run clean:examples",
     "clean:lib": "rimraf lib",
     "clean:examples": "rimraf examples/dist",
+    "dev": "npm run dev:examples",
     "dev:examples": "webpack-dev-server --hot --context examples --config examples/webpack.config.js --mode development"
   },
   "peerDependencies": {
