@@ -1,14 +1,16 @@
 <template>
   <div class="icon-wrap">
-    <div v-if="type === 'loader'" class="ball-clip-rotate-multiple">
+    <div v-if="type === 'loader'" class="ball-clip-rotate-multiple" :class="this.theme">
       <div></div>
       <div></div>
     </div>
-    <div v-if="type === 'error'" class="icono-crossCircle"></div>
+    <div v-if="type === 'error'" class="icono-crossCircle" :class="this.theme"></div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+
+interface IIconTheme {}
 
 @Component
 export default class Icon extends Vue {
@@ -16,6 +18,15 @@ export default class Icon extends Vue {
     required: true
   })
   type!: string;
+
+  @Prop({
+    type: String,
+    default: 'dark',
+    validator(value) {
+      return ['light', 'dark'].indexOf(value) !== -1;
+    }
+  })
+  theme!: string;
 }
 </script>
 
@@ -47,7 +58,7 @@ export default class Icon extends Vue {
   position: absolute;
   left: -20px;
   top: -20px;
-  border: 2px solid #666;
+  border: 2px solid #333;
   border-bottom-color: transparent;
   border-top-color: transparent;
   border-radius: 100%;
@@ -62,9 +73,14 @@ export default class Icon extends Vue {
   width: 15px;
   height: 15px;
   animation-duration: 0.8s;
-  border-color: #666 transparent #666 transparent;
+  border-color: #333 transparent #333 transparent;
   animation-direction: reverse;
 }
+.ball-clip-rotate-multiple.dark > div,
+.ball-clip-rotate-multiple.dark > div:last-child {
+  border-color: #eee transparent #eee transparent;
+}
+
 .icono-crossCircle {
   border-radius: 50%;
   width: 30px;
@@ -78,13 +94,16 @@ export default class Icon extends Vue {
   top: -15px;
   left: -15px;
   font-style: normal;
-  color: #666;
+  color: #333;
   text-align: left;
   text-indent: -9999px;
   direction: ltr;
   transform: rotate(45deg);
   margin: 0;
   padding: 0;
+}
+.icono-crossCircle.dark {
+  color: #eee;
 }
 .icono-crossCircle:before {
   width: 18px;
