@@ -19,13 +19,7 @@ export default class Icon extends Vue {
   })
   type!: string;
 
-  @Prop({
-    type: String,
-    default: 'dark',
-    validator(value) {
-      return ['light', 'dark'].indexOf(value) !== -1;
-    }
-  })
+  @Prop()
   theme!: string;
 }
 </script>

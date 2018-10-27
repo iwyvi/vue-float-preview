@@ -15,7 +15,7 @@
             :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
           >
             <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
-              <icon v-if="isImageLoading" class="vfp-content-image-loader" type="loader"></icon>
+              <icon v-if="isImageLoading" class="vfp-content-image-loader" type="loader" :theme="iconTheme"></icon>
               <img class="vfp-content-image-placeholder" :src="src">
             </div>
           </div>
@@ -29,12 +29,12 @@
         :style="previewStyle"
       >
         <slot name="preview">
-          <icon v-if="isImageLoading" type="loader"></icon>
+          <icon v-if="isImageLoading" type="loader" :theme="iconTheme"></icon>
           <span v-else-if="isImageError">
-            <icon type="error"></icon>
+            <icon type="error" :theme="iconTheme"></icon>
           </span>
           <img v-else-if="src" :src="src" class="vfp-preview-image">
-          <icon v-else type="error"></icon>
+          <icon v-else type="error" :theme="iconTheme"></icon>
         </slot>
       </div>
     </div>
@@ -129,6 +129,15 @@ export default class VueFloatPreview extends Vue {
     validator: isPositive(false)
   })
   height!: number;
+
+  @Prop({
+    type: String,
+    default: 'light',
+    validator(value) {
+      return ['light', 'dark'].indexOf(value) !== -1;
+    }
+  })
+  iconTheme!: string;
 
   private isOver = false;
   private isRender = false;
