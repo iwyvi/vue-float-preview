@@ -33,10 +33,10 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class WeiboDemo extends Vue {
   imageList = [
-    'https://cdn.pixabay.com/photo/2018/10/21/21/28/autumn-3763897__340.jpg',
-    'https://cdn.pixabay.com/photo/2018/04/28/22/03/dawn-3358468_960_720.jpg',
-    'https://cdn.pixabay.com/photo/2018/10/06/11/22/coffee-3727673_960_720.jpg',
-    'https://cdn.pixabay.com/photo/2014/02/27/16/10/spring-276014_960_720.jpg',
+    'https://s1.ax1x.com/2018/10/27/icQ6f0.jpg',
+    'https://s1.ax1x.com/2018/10/27/icQyYq.jpg',
+    'https://s1.ax1x.com/2018/10/27/icQgpV.jpg',
+    'https://s1.ax1x.com/2018/10/27/icQ2lT.jpg',
     'assets/logo.png'
   ];
 }
