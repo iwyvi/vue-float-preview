@@ -15,7 +15,7 @@
         >
           <slot>
             <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
-              <icon v-if="isImageLoading" class="vfp-content-image-loader" name="loader"></icon>
+              <icon v-if="isImageLoading" class="vfp-content-image-loader" type="loader"></icon>
               <img class="vfp-content-image-placeholder" :src="src">
             </div>
           </slot>
@@ -29,12 +29,12 @@
         :style="previewStyle"
       >
         <slot name="preview">
-          <icon v-if="isImageLoading" name="loader"></icon>
+          <icon v-if="isImageLoading" type="loader"></icon>
           <span v-else-if="isImageError">
-            <icon name="error"></icon>
+            <icon type="error"></icon>
           </span>
           <img v-else-if="src" :src="src" class="vfp-preview-image">
-          <icon v-else name="error"></icon>
+          <icon v-else type="error"></icon>
         </slot>
       </div>
     </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="icon-wrap">
-    <div v-if="name === 'loader'" class="ball-clip-rotate-multiple">
+    <div v-if="type === 'loader'" class="ball-clip-rotate-multiple">
       <div></div>
       <div></div>
     </div>
-    <div v-if="name === 'error'" class="icono-crossCircle"></div>
+    <div v-if="type === 'error'" class="icono-crossCircle"></div>
   </div>
 </template>
 <script lang="ts">
@@ -15,7 +15,7 @@ export default class Icon extends Vue {
   @Prop({
     required: true
   })
-  name!: string;
+  type!: string;
 }
 </script>
 
