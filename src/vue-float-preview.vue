@@ -9,17 +9,17 @@
         @mouseover.capture="onMouseOver"
         ref="content-wrap"
       >
-        <div
-          class="vfp-content-scale"
-          :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
-        >
-          <slot>
+        <slot>
+          <div
+            class="vfp-content-scale"
+            :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
+          >
             <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
               <icon v-if="isImageLoading" class="vfp-content-image-loader" type="loader"></icon>
               <img class="vfp-content-image-placeholder" :src="src">
             </div>
-          </slot>
-        </div>
+          </div>
+        </slot>
       </div>
       <div
         v-if="!disabled && isRender"
