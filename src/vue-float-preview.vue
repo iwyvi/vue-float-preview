@@ -102,9 +102,9 @@ export default class VueFloatPreview extends Vue {
   offsetY!: number; // 与鼠标的距离
 
   @Prop({
-    type: String
+    type: Object
   })
-  contentStyle!: string;
+  contentStyle!: object;
 
   @Prop({
     type: Number,
