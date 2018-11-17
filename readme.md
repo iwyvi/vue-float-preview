@@ -4,6 +4,8 @@
 
 > A Floating Previewer for Vue.js.
 
+https://www.iwyvi.com/vue-float-preview/
+
 ## Install
 
 ### yarn
