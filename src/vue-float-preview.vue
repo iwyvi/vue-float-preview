@@ -15,7 +15,12 @@
             :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
           >
             <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
-              <icon v-if="isImageLoading" class="vfp-content-image-loader" type="loader" :theme="iconTheme"></icon>
+              <icon
+                v-if="isImageLoading"
+                class="vfp-content-image-loader"
+                type="loader"
+                :theme="iconTheme"
+              ></icon>
               <img class="vfp-content-image-placeholder" :src="src">
             </div>
           </div>
@@ -179,8 +184,7 @@ export default class VueFloatPreview extends Vue {
       const img = document.createElement('img');
       img.src = this.src;
       img.onload = () => {
-        this.imageWidth = img.width;
-        this.imageHeight = img.height;
+        [this.imageWidth, this.imageHeight] = [img.width, img.height];
         this.isImageLoading = false;
         this.isImageError = false;
         this.setPreviewSize();
@@ -208,29 +212,27 @@ export default class VueFloatPreview extends Vue {
       return;
     }
     const [windowWidth, windowHeight] = this.getWindowSize();
-    const maxPreviewWidth = this.maxWidth
-      ? Math.min((windowWidth * 3) / 5, this.maxWidth)
-      : (windowWidth * 3) / 5;
-    const maxPreviewHeight = this.maxHeight
-      ? Math.min(windowHeight, this.maxHeight)
-      : windowHeight;
-    let [previewWidth, previewHeight] = [0, 0];
+    const [maxPreviewWidth, maxPreviewHeight] = [
+      this.maxWidth
+        ? Math.min((windowWidth * 3) / 5, this.maxWidth)
+        : (windowWidth * 3) / 5,
+      this.maxHeight ? Math.min(windowHeight, this.maxHeight) : windowHeight
+    ];
+    let [previewWidth, previewHeight] = [width, height];
     const ratio = width / height;
     if (ratio >= 1) {
       if (width > maxPreviewWidth) {
-        previewWidth = maxPreviewWidth;
-        previewHeight = Math.round(maxPreviewWidth / ratio);
-      } else {
-        previewWidth = width;
-        previewHeight = height;
+        [previewWidth, previewHeight] = [
+          maxPreviewWidth,
+          Math.round(maxPreviewWidth / ratio)
+        ];
       }
     } else {
       if (height > maxPreviewHeight) {
-        previewWidth = Math.round(maxPreviewHeight * ratio);
-        previewHeight = maxPreviewHeight;
-      } else {
-        previewWidth = width;
-        previewHeight = height;
+        [previewWidth, previewHeight] = [
+          Math.round(maxPreviewHeight * ratio),
+          maxPreviewHeight
+        ];
       }
     }
     [this.previewWidth, this.previewHeight] = [previewWidth, previewHeight];
@@ -255,8 +257,7 @@ export default class VueFloatPreview extends Vue {
     const imageWrap = this.$refs['content-wrap'] as HTMLElement;
     const [relativeX, relativeY] = this.getRelativePosition(imageWrap);
     const [windowWidth, windowHeight] = this.getWindowSize();
-    let reverseX = false;
-    let reverseY = false;
+    let [reverseX, reverseY] = [false, false];
     if (
       relativeX + cursorX + this.offsetX + this.previewWidth / 2 >
       windowWidth
