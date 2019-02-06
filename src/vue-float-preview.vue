@@ -48,13 +48,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import Icon from './icon.vue';
-
-function isPositive(equal: boolean = true): (v: number) => boolean {
-  if (equal) {
-    return (v) => (v >= 0 ? true : false);
-  }
-  return (v) => (v > 0 ? true : false);
-}
+import { isPositive, isPositiveWithZero, mergeProps } from './utils';
 
 @Component({
   components: {
@@ -74,70 +68,97 @@ export default class VueFloatPreview extends Vue {
   disabled!: boolean;
 
   @Prop({
-    default: true,
+    default() {
+      return mergeProps(this, 'scale', true);
+    },
     type: Boolean
   })
   scale!: boolean;
 
   @Prop({
-    default: 150,
+    default() {
+      return mergeProps(this, 'showDelay', 150);
+    },
     type: Number,
-    validator: isPositive()
+    validator: isPositiveWithZero
   })
   showDelay!: number; // 鼠标放上以后的显示延迟
 
   @Prop({
-    default: 100,
+    default() {
+      return mergeProps(this, 'hideDelay', 100);
+    },
     type: Number,
-    validator: isPositive()
+    validator: isPositiveWithZero
   })
   hideDelay!: number; // 鼠标移走后的隐藏延迟
 
   @Prop({
-    default: 40,
+    default() {
+      return mergeProps(this, 'offsetX', 40);
+    },
     type: Number,
-    validator: isPositive(false)
+    validator: isPositive
   })
   offsetX!: number; // 与鼠标的距离（这个必须为正值）
 
   @Prop({
-    default: -40,
+    default() {
+      return mergeProps(this, 'offsetY', -40);
+    },
     type: Number
   })
   offsetY!: number; // 与鼠标的距离
 
   @Prop({
+    default() {
+      return mergeProps(this, 'contentStyle');
+    },
     type: Object
   })
   contentStyle!: object;
 
   @Prop({
+    default() {
+      return mergeProps(this, 'maxWidth');
+    },
     type: Number,
-    validator: isPositive(false)
+    validator: isPositive
   })
   maxWidth!: number;
 
   @Prop({
+    default() {
+      return mergeProps(this, 'maxHeight');
+    },
     type: Number,
-    validator: isPositive(false)
+    validator: isPositive
   })
   maxHeight!: number;
 
   @Prop({
+    default() {
+      return mergeProps(this, 'width');
+    },
     type: Number,
-    validator: isPositive(false)
+    validator: isPositive
   })
   width!: number;
 
   @Prop({
+    default() {
+      return mergeProps(this, 'height');
+    },
     type: Number,
-    validator: isPositive(false)
+    validator: isPositive
   })
   height!: number;
 
   @Prop({
+    default() {
+      return mergeProps(this, 'iconTheme');
+    },
     type: String,
-    default: 'light',
     validator(value) {
       return ['light', 'dark'].indexOf(value) !== -1;
     }
