@@ -26,7 +26,7 @@ npm install --save vue-float-preview
 import Vue from 'vue';
 import VueFloatPreview from 'vue-float-preview';
 
-Vue.use(VueFloatPreview);
+Vue.use(VueFloatPreview, OPTIONS);
 ```
 
 ```vue
@@ -39,7 +39,7 @@ For more information, please refer to [Examples](https://www.iwyvi.com/vue-float
 
 ## Document
 
-### Attribute
+### Attributes
 
 | Attribute | Description | Type | Accepted Values | Default |
 | ------ | ------ | ------ | ------ | ------ |
@@ -64,6 +64,25 @@ For more information, please refer to [Examples](https://www.iwyvi.com/vue-float
 | default | base content (will replace default image block) | Y |
 | preview | content in previewer (will replace default image block in previewer) | Y |
 
+### Events
+
+| Event Name | Description | Parameters |
+| --- | --- | --- |
+| onPreviewShow | triggers when previewer shows | - |
+| onPreviewHide | triggers when previewer hides | - |
+
+### Global Options
+
+```javascript
+Vue.use(VueFloatPreview, {
+  showDelay: 300,
+  iconTheme: 'dark'
+})
+```
+
+Available options: `scale`, `showDelay`, `hideDelay`, `offsetX`, `offsetY`, `contentStyle`, `maxWidth`, `maxHeight`, `width`, `height`, `iconTheme`.
+
+Refers to the document of Attributes.
 
 ## Development
 

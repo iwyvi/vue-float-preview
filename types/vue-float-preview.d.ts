@@ -29,15 +29,17 @@ export declare class VueFloatPreview extends BaseComponent {
 
   offsetY: number;
 
-  contentStyle: object | string;
+  contentStyle: object;
 
-  maxPreviewWidth: number;
+  maxWidth: number;
 
-  maxPreviewHeight: number;
+  maxHeight: number;
 
   width: number;
 
   height: number;
+
+  iconTheme: 'light' | 'dark';
 
   $slots: VueFloatPreviewSlots;
 }
