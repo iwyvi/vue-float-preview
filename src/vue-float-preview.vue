@@ -306,8 +306,10 @@ export default class VueFloatPreview extends Vue {
     clearTimeout(this.showTimer);
     this.isOver = false;
     this.hideTimer = setTimeout(() => {
-      this.isHidding = true;
-      this.isShowing = false;
+      if (this.isShowing) {
+        this.isHidding = true;
+        this.isShowing = false;
+      }
       this.isSetPosition = false;
       this.destroyTimer = setTimeout(() => {
         this.isRender = false;
