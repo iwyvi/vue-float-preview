@@ -330,6 +330,7 @@ export default class VueFloatPreview extends Vue {
       if (this.isShowing) {
         this.isHidding = true;
         this.isShowing = false;
+        this.$emit('onPreviewHide');
       }
       this.isSetPosition = false;
       this.destroyTimer = setTimeout(() => {
@@ -345,6 +346,9 @@ export default class VueFloatPreview extends Vue {
     this.isOver = true;
     this.setPreviewSize();
     this.showTimer = setTimeout(() => {
+      if (!this.isShowing) {
+        this.$emit('onPreviewShow');
+      }
       this.isShowing = true;
       this.isHidding = false;
       this.$nextTick(() => {
