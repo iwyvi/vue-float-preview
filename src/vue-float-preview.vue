@@ -49,6 +49,7 @@ import Icon from './icon.vue';
 import { isPositive, isPositiveWithZero, mergeProps } from './utils';
 
 @Component({
+  name: 'VueFloatPreview',
   components: {
     Icon
   }
