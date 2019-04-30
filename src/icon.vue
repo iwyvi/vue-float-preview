@@ -10,21 +10,19 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
-interface IIconTheme {}
-
 @Component
 export default class Icon extends Vue {
   @Prop({
     required: true
   })
-  type!: string;
+  type!: 'loader' | 'error';
 
   @Prop()
-  theme!: string;
+  theme!: 'light' | 'dark';
 }
 </script>
 
-<style scoped>
+<style>
 @keyframes rotate {
   0% {
     transform: rotate(0deg) scale(1);

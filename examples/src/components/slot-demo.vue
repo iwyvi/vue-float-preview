@@ -24,6 +24,7 @@ export default class SlotDemo extends Vue {}
 <style scoped>
 .slot-demo {
   width: 500px;
+  height: auto;
   border-radius: 20px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 }

@@ -1,47 +1,45 @@
 <template>
-  <div>
-    <div class="vfp-wrap">
-      <div
-        class="vfp-content-wrap"
-        :style="contentStyle"
-        @mousemove.capture="onMouseMove"
-        @mouseout.capture="onMouseOut"
-        @mouseover.capture="onMouseOver"
-        ref="content-wrap"
-      >
-        <slot>
-          <div
-            class="vfp-content-scale"
-            :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
-          >
-            <div class="vfp-content-image" :style="{'background-image': `url(${src})`}">
-              <icon
-                v-if="isImageLoading"
-                class="vfp-content-image-loader"
-                type="loader"
-                :theme="iconTheme"
-              ></icon>
-              <img class="vfp-content-image-placeholder" :src="thumbSrc || src">
-            </div>
+  <div class="vfp-wrap">
+    <div
+      ref="content-wrap"
+      class="vfp-content-wrap"
+      :style="contentStyle"
+      @mousemove.capture="onMouseMove"
+      @mouseout.capture="onMouseOut"
+      @mouseover.capture="onMouseOver"
+    >
+      <slot>
+        <div
+          class="vfp-content-scale"
+          :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
+        >
+          <div class="vfp-content-image" :style="contentImageSyle">
+            <icon
+              v-if="isImageLoading"
+              class="vfp-content-image-loader"
+              type="loader"
+              :theme="iconTheme"
+            ></icon>
+            <img class="vfp-content-image-placeholder" :src="thumbSrc || src">
           </div>
-        </slot>
-      </div>
-      <div
-        v-if="!disabled && isRender"
-        :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
-        class="vfp-preview-wrap"
-        ref="preview-wrap"
-        :style="previewStyle"
-      >
-        <slot name="preview">
-          <icon v-if="isImageLoading" type="loader" :theme="iconTheme"></icon>
-          <span v-else-if="isImageError">
-            <icon type="error" :theme="iconTheme"></icon>
-          </span>
-          <img v-else-if="src" :src="src" class="vfp-preview-image">
-          <icon v-else type="error" :theme="iconTheme"></icon>
-        </slot>
-      </div>
+        </div>
+      </slot>
+    </div>
+    <div
+      ref="preview-wrap"
+      v-if="!disabled && isRender"
+      class="vfp-preview-wrap"
+      :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
+      :style="previewStyle"
+    >
+      <slot name="preview">
+        <icon v-if="isImageLoading" type="loader" :theme="iconTheme"></icon>
+        <span v-else-if="isImageError">
+          <icon type="error" :theme="iconTheme"></icon>
+        </span>
+        <img v-else-if="src" :src="src" class="vfp-preview-image">
+        <icon v-else type="error" :theme="iconTheme"></icon>
+      </slot>
     </div>
   </div>
 </template>
@@ -168,7 +166,7 @@ export default class VueFloatPreview extends Vue {
       return ['light', 'dark'].indexOf(value) !== -1;
     }
   })
-  iconTheme!: string;
+  iconTheme!: 'light' | 'dark';
 
   private isOver = false;
   private isRender = false;
@@ -194,6 +192,15 @@ export default class VueFloatPreview extends Vue {
     return {
       width: `${this.previewWidth}px`,
       height: `${this.previewHeight}px`
+    };
+  }
+
+  private get contentImageSyle() {
+    if (!this.thumbSrc && !this.src) {
+      return {};
+    }
+    return {
+      'background-image': `url(${this.thumbSrc || this.src})`
     };
   }
 
@@ -365,12 +372,12 @@ export default class VueFloatPreview extends Vue {
   }
 }
 </script>
-<style scoped>
+<style>
 .vfp-wrap {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 320px;
+  height: 180px;
 }
 .vfp-content-wrap {
   display: flex;
