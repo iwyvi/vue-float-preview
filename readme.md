@@ -44,6 +44,7 @@ For more information, please refer to [Examples](https://www.iwyvi.com/vue-float
 | Attribute | Description | Type | Accepted Values | Default |
 | ------ | ------ | ------ | ------ | ------ |
 | src | src of the image | string | - | - |
+| thumbSrc | src of the thumbnail | string | - | - |
 | disabled | whether functions of the component is disabled | boolean | - | false |
 | scale | whether scale of image when hovering is enabled | boolean | - | true |
 | show-delay | the delay before showing the previewer | number | - | 150 |

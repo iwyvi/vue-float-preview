@@ -17,6 +17,8 @@ export interface VueFloatPreviewSlots {
 export declare class VueFloatPreview extends BaseComponent {
   src: string;
 
+  thumbSrc: string;
+
   disabled: boolean;
 
   scale: boolean;
