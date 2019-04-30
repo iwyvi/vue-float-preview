@@ -21,7 +21,7 @@
                 type="loader"
                 :theme="iconTheme"
               ></icon>
-              <img class="vfp-content-image-placeholder" :src="src">
+              <img class="vfp-content-image-placeholder" :src="thumbSrc || src">
             </div>
           </div>
         </slot>
@@ -60,6 +60,11 @@ export default class VueFloatPreview extends Vue {
     type: String
   })
   src!: string;
+
+  @Prop({
+    type: String
+  })
+  thumbSrc!: string;
 
   @Prop({
     default: false,
