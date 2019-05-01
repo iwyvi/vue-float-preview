@@ -299,7 +299,7 @@ export default class VueFloatPreview extends Vue {
       reverseX = true;
     }
     if (
-      relativeY + cursorY + this.offsetY + (this.previewHeight * 3) / 5 >
+      relativeY + cursorY + this.offsetY + (this.previewHeight * 49) / 50 >
       windowHeight
     ) {
       reverseY = true;
