@@ -198,8 +198,10 @@ export default class VueFloatPreview extends Vue {
 
   private get contentImageStyle() {
     if (this.thumbSrc || this.src) {
+      let src = this.thumbSrc || this.src;
+      src = src.replace(/("|')/g, `\\"`);
       return {
-        'background-image': `url(${this.thumbSrc || this.src})`
+        'background-image': `url(${src})`
       };
     }
     return {};
