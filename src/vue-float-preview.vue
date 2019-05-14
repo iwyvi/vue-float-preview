@@ -1,5 +1,5 @@
 <template>
-  <div class="vfp-default-size">
+  <div :class="{'vfp-default-size': thumbSize === 'contain'}">
     <div class="vfp-wrap">
       <div
         ref="content-wrap"
@@ -391,7 +391,7 @@ export default class VueFloatPreview extends Vue {
 <style>
 .vfp-default-size {
   width: 320px;
-  height: 180px;
+  height: auto;
 }
 .vfp-wrap {
   position: relative;
@@ -402,10 +402,6 @@ export default class VueFloatPreview extends Vue {
 .vfp-thumb-size-contain {
   width: 100%;
   height: 100%;
-}
-.vfp-thumb-size-auto {
-  max-width: 100%;
-  max-height: 100%;
 }
 .vfp-content-wrap {
   display: flex;
