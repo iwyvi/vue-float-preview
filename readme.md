@@ -47,6 +47,7 @@ For more information, please refer to [Examples](https://www.iwyvi.com/vue-float
 | thumbSrc | src of the thumbnail | string | - | - |
 | disabled | whether functions of the component is disabled | boolean | - | false |
 | scale | whether scale of image when hovering is enabled | boolean | - | true |
+| thumbSize | whether thumbnail fill the block | contain / auto | contain |
 | show-delay | the delay before showing the previewer | number | - | 150 |
 | hide-delay | the delay before hiding the previewer | number | - | 100 |
 | offset-x | the X-axis offset of the previewer (should always be positive) | number | - | 40 |
@@ -81,7 +82,7 @@ Vue.use(VueFloatPreview, {
 })
 ```
 
-Available options: `scale`, `showDelay`, `hideDelay`, `offsetX`, `offsetY`, `contentStyle`, `maxWidth`, `maxHeight`, `width`, `height`, `iconTheme`.
+Available options: `scale`, `thumbSize`, `showDelay`, `hideDelay`, `offsetX`, `offsetY`, `contentStyle`, `maxWidth`, `maxHeight`, `width`, `height`, `iconTheme`.
 
 Refers to the document of Attributes.
 
