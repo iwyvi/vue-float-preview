@@ -13,7 +13,7 @@
           class="vfp-content-scale"
           :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
         >
-          <div class="vfp-content-image" :style="contentImageStyle">
+          <div class="vfp-content-image">
             <icon
               v-if="isImageLoading"
               class="vfp-content-image-loader"
@@ -194,17 +194,6 @@ export default class VueFloatPreview extends Vue {
       width: `${this.previewWidth}px`,
       height: `${this.previewHeight}px`
     };
-  }
-
-  private get contentImageStyle() {
-    if (this.thumbSrc || this.src) {
-      let src = this.thumbSrc || this.src;
-      src = src.replace(/("|')/g, `\\"`);
-      return {
-        'background-image': `url(${src})`
-      };
-    }
-    return {};
   }
 
   private mounted() {
@@ -414,10 +403,9 @@ export default class VueFloatPreview extends Vue {
   right: 0;
 }
 .vfp-content-image-placeholder {
-  min-width: 100%;
-  min-height: 100%;
-  opacity: 0;
-  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .vfp-preview-wrap {
   position: absolute;
