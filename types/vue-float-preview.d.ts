@@ -23,6 +23,8 @@ export declare class VueFloatPreview extends BaseComponent {
 
   scale: boolean;
 
+  thumbSize: 'contain' | 'auto';
+
   showDelay: number;
 
   hideDelay: number;

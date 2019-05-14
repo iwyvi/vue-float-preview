@@ -9,6 +9,12 @@ export function install(vue: typeof Vue, options: InstallationOptions = {}) {
 
   vue.prototype.$VUE_FLOAT_PREVIEW_OPTIONS = {
     scale: typeof options.scale === 'boolean' ? options.scale : true,
+    thumbSize:
+      options.thumbSize === 'contain'
+        ? 'contain'
+        : options.thumbSize === 'auto'
+        ? 'auto'
+        : 'contain',
     showDelay:
       typeof options.showDelay === 'number' &&
       isPositiveWithZero(options.showDelay)

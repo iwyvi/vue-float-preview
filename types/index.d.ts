@@ -4,6 +4,7 @@ export * from './vue-float-preview';
 
 export interface InstallationOptions {
   scale?: boolean;
+  thumbSize?: 'contain' | 'auto';
   showDelay?: number;
   hideDelay?: number;
   offsetX?: number;

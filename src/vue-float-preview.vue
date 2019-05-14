@@ -1,45 +1,58 @@
 <template>
-  <div class="vfp-wrap">
-    <div
-      ref="content-wrap"
-      class="vfp-content-wrap"
-      :style="contentStyle"
-      @mousemove.capture="onMouseMove"
-      @mouseout.capture="onMouseOut"
-      @mouseover.capture="onMouseOver"
-    >
-      <slot>
-        <div
-          class="vfp-content-scale"
-          :class="{'vfp-scale-over': !disabled && !isImageError && scale && isOver}"
-        >
-          <div class="vfp-content-image">
-            <icon
-              v-if="isImageLoading"
-              class="vfp-content-image-loader"
-              type="loader"
-              :theme="iconTheme"
-            ></icon>
-            <img class="vfp-content-image-placeholder" :src="thumbSrc || src">
+  <div class="vfp-default-size">
+    <div class="vfp-wrap">
+      <div
+        ref="content-wrap"
+        class="vfp-content-wrap"
+        :class="{'vfp-thumb-size-contain': thumbSize === 'contain'}"
+        :style="contentStyle"
+        @mousemove.capture="onMouseMove"
+        @mouseout.capture="onMouseOut"
+        @mouseover.capture="onMouseOver"
+      >
+        <slot>
+          <div
+            class="vfp-content-scale"
+            :class="{
+            'vfp-scale-over': !disabled && !isImageError && scale && isOver,
+            'vfp-thumb-size-contain': thumbSize === 'contain'
+          }"
+          >
+            <div
+              class="vfp-content-image"
+              :class="{'vfp-thumb-size-contain': thumbSize === 'contain'}"
+            >
+              <icon
+                v-if="isImageLoading"
+                class="vfp-content-image-loader"
+                type="loader"
+                :theme="iconTheme"
+              ></icon>
+              <img
+                class="vfp-content-image-placeholder"
+                :class="{'vfp-thumb-size-contain': thumbSize === 'contain', 'vfp-thumb-size-auto': thumbSize === 'auto'}"
+                :src="thumbSrc || src"
+              >
+            </div>
           </div>
-        </div>
-      </slot>
-    </div>
-    <div
-      ref="preview-wrap"
-      v-if="!disabled && isRender"
-      class="vfp-preview-wrap"
-      :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
-      :style="previewStyle"
-    >
-      <slot name="preview">
-        <icon v-if="isImageLoading" type="loader" :theme="iconTheme"></icon>
-        <span v-else-if="isImageError">
-          <icon type="error" :theme="iconTheme"></icon>
-        </span>
-        <img v-else-if="src" :src="src" class="vfp-preview-image">
-        <icon v-else type="error" :theme="iconTheme"></icon>
-      </slot>
+        </slot>
+      </div>
+      <div
+        ref="preview-wrap"
+        v-if="!disabled && isRender"
+        class="vfp-preview-wrap"
+        :class="{'vfp-fade-in': isShowing, 'vfp-fade-out': isHidding}"
+        :style="previewStyle"
+      >
+        <slot name="preview">
+          <icon v-if="isImageLoading" type="loader" :theme="iconTheme"></icon>
+          <span v-else-if="isImageError">
+            <icon type="error" :theme="iconTheme"></icon>
+          </span>
+          <img v-else-if="src" :src="src" class="vfp-preview-image">
+          <icon v-else type="error" :theme="iconTheme"></icon>
+        </slot>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +91,17 @@ export default class VueFloatPreview extends Vue {
     type: Boolean
   })
   scale!: boolean;
+
+  @Prop({
+    default() {
+      return mergeProps(this, 'thumbSize');
+    },
+    type: String,
+    validator(value) {
+      return ['auto', 'contain'].indexOf(value) !== -1;
+    }
+  })
+  thumbSize!: 'auto' | 'contain';
 
   @Prop({
     default() {
@@ -365,16 +389,26 @@ export default class VueFloatPreview extends Vue {
 }
 </script>
 <style>
-.vfp-wrap {
-  position: relative;
-  display: flex;
+.vfp-default-size {
   width: 320px;
   height: 180px;
 }
-.vfp-content-wrap {
+.vfp-wrap {
+  position: relative;
   display: flex;
+  height: 100%;
+  width: 100%;
+}
+.vfp-thumb-size-contain {
   width: 100%;
   height: 100%;
+}
+.vfp-thumb-size-auto {
+  max-width: 100%;
+  max-height: 100%;
+}
+.vfp-content-wrap {
+  display: flex;
   overflow: hidden;
 }
 .vfp-content-scale {
@@ -382,17 +416,11 @@ export default class VueFloatPreview extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
   transition: 0.5s all ease;
   transition-delay: 0.1s;
 }
 .vfp-content-image {
-  width: 100%;
-  height: 100%;
   position: relative;
-  background-size: cover;
-  background-position: top center;
 }
 .vfp-content-image-loader {
   position: absolute;
@@ -403,9 +431,8 @@ export default class VueFloatPreview extends Vue {
   right: 0;
 }
 .vfp-content-image-placeholder {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
+  display: block;
 }
 .vfp-preview-wrap {
   position: absolute;
@@ -428,20 +455,20 @@ export default class VueFloatPreview extends Vue {
 }
 .vfp-fade-in {
   opacity: 1;
-  animation-name: fadeIn;
+  animation-name: vfpFadeIn;
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
 }
 .vfp-fade-out {
   opacity: 0;
-  animation-name: fadeOut;
+  animation-name: vfpFadeOut;
   animation-duration: 0.2s;
   animation-timing-function: ease-in;
 }
 .vfp-scale-over {
   transform: scale(1.1);
 }
-@keyframes fadeIn {
+@keyframes vfpFadeIn {
   0% {
     transform: scale(0.6);
     opacity: 0;
@@ -451,7 +478,7 @@ export default class VueFloatPreview extends Vue {
     opacity: 1;
   }
 }
-@keyframes fadeOut {
+@keyframes vfpFadeOut {
   0% {
     transform: scale(1);
     opacity: 1;
